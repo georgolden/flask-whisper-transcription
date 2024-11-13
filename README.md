@@ -1,6 +1,6 @@
 # Flask Audio Transcription App
 
-A simple Flask web application that transcribes audio files using OpenAI's Whisper API.
+A Flask web application that transcribes audio files using OpenAI's Whisper API.
 
 ## Features
 
@@ -16,10 +16,11 @@ A simple Flask web application that transcribes audio files using OpenAI's Whisp
 
 - Python 3.8+
 - OpenAI API key
-- Flask
-- python-dotenv
+- Docker (optional)
 
 ## Installation
+
+### Option 1: Local Installation with Virtual Environment
 
 1. Clone the repository:
 ```bash
@@ -27,33 +28,111 @@ git clone https://github.com/georgolden/flask-whisper-transcription.git
 cd flask-whisper-transcription
 ```
 
-2. Install required packages:
+2. Create and activate virtual environment:
 ```bash
-pip install flask openai python-dotenv
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
 ```
 
-3. Create a .env file in the project root:
+3. Install required packages:
+```bash
+pip install -r requirements.txt
+```
+
+4. Create a .env file in the project root:
 ```bash
 echo "OPENAI_API_KEY=your-api-key-here" > .env
 ```
 
-## Usage
+### Option 2: Docker Installation
 
-1. Start the application:
+1. Clone the repository:
 ```bash
-python3 app.py
+git clone https://github.com/georgolden/flask-whisper-transcription.git
+cd flask-whisper-transcription
 ```
 
-2. Open your browser and navigate to:
+2. Create a .env file with your OpenAI API key:
+```bash
+echo "OPENAI_API_KEY=your-api-key-here" > .env
+```
+
+3. Build and run the Docker container:
+```bash
+# Build the image
+docker build -t flask-whisper-app .
+
+# Run the container
+docker run -d -p 5000:5000 --env-file .env flask-whisper-app
+```
+
+## Usage
+
+### Running Locally
+
+1. Activate the virtual environment (if not already activated):
+```bash
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+
+2. Start the application:
+```bash
+python app.py
+```
+
+3. Open your browser and navigate to:
 ```
 http://localhost:5000
 ```
 
-3. Upload an audio file by dragging and dropping or using the file selector
+### Running with Docker
 
-4. Wait for transcription to complete
+1. The application will be available at:
+```
+http://localhost:5000
+```
 
-5. Transcription will automatically download as a text file
+2. To stop the container:
+```bash
+docker ps  # Find the container ID
+docker stop <container-id>
+```
+
+## Development
+
+### Virtual Environment Tips
+- Always activate the virtual environment before working on the project
+- If you install new packages, update requirements.txt:
+```bash
+pip freeze > requirements.txt
+```
+- To deactivate the virtual environment:
+```bash
+deactivate
+```
+
+### Docker Development Tips
+- Rebuild the image after making changes:
+```bash
+docker build -t flask-whisper-app .
+```
+- View logs:
+```bash
+docker logs <container-id>
+```
+- Access container shell:
+```bash
+docker exec -it <container-id> bash
+```
 
 ## Supported File Formats
 

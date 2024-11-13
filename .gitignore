@@ -53,3 +53,4 @@ instance/
 tmp/
 temp/
 .pytest_cache/
+transcriptions

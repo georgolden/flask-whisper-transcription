@@ -18,7 +18,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 25 * 1024 * 1024  # 25MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 26 * 1024 * 1024  # 26MB max file size
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
 
 # Initialize OpenAI client
